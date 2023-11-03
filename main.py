@@ -23,9 +23,9 @@ energycon_df.sort_values(by=['Datetime'], inplace=True, ascending=True)
 zero_mwt = energycon_df.loc[energycon_df.loc[:,'MWT'] == 0].index
 zero_pft = energycon_df.loc[energycon_df.loc[:,'PFT'] == 0].index
 
-# Prepare the dataset for the neural network
 def create_dataset(dataset, look_back=1):
-    dataX, dataY = pd.DataFrame(), pd.Series()
+    dataX = pd.DataFrame()  # Initializing dataX as an empty DataFrame
+    dataY = pd.Series()
     for i in range(len(dataset) - look_back):
         dataX = dataX.append(dataset.iloc[i:(i + look_back)].reset_index(drop=True))
         dataY = dataY.append(pd.Series(dataset.iloc[i + look_back]))
