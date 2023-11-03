@@ -25,16 +25,18 @@ zero_pft = energycon_df.loc[energycon_df.loc[:,'PFT'] == 0].index
 
 def create_dataset(dataset, look_back=1):
     dataX = []  # Initializing as a list
-    dataY = pd.Series()
-    
+    dataY = []  # Initializing as a list
+
     for i in range(len(dataset) - look_back):
         dataX.append(dataset.iloc[i:(i + look_back)].values)
-        dataY = dataY.append(pd.Series(dataset.iloc[i + look_back]))
-        
-    # Convert the list to DataFrame
+        dataY.append(dataset.iloc[i + look_back])
+
+    # Convert the lists to DataFrames
     dataX = pd.DataFrame(np.array(dataX).reshape(-1, look_back))
+    dataY = pd.Series(dataY)
 
     return dataX, dataY
+
 
 
 # Imputing zero values
