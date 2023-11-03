@@ -31,10 +31,6 @@ def create_dataset(dataset, look_back=1):
         dataY = dataY.append(pd.Series(dataset.iloc[i + look_back]))
     return dataX, dataY
 
-look_back = 24  # Number of previous hours to use for prediction
-trainX, trainY = create_dataset(train, look_back)
-testX, testY = create_dataset(test, look_back)
-
 # Imputing zero values
 for index in zero_mwt:
     energycon_df.loc[index,'MWT'] = np.random.normal(
@@ -258,7 +254,10 @@ elif page == "Models":
     
     # Display Plotly figure using st.plotly_chart()
     st.plotly_chart(fig_train_test, use_container_width=True)
-    
+    look_back = 24  # Number of previous hours to use for prediction
+    trainX, trainY = create_dataset(train, look_back)
+    testX, testY = create_dataset(test, look_back)
+
     model_section = st.selectbox("Choose a Model", ["MLP", "LSTM", "GRU"])
 
     if model_section == "MLP":
