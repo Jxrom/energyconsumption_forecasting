@@ -107,7 +107,7 @@ if page == "Exploratory Data Analysis":
     plotly_fig_pft = go.Figure()
     for line in lines_pft:
         x, y = line.get_data()
-        plotly_fig_pft.add_trace(go.Scatter(x=x, y=y, mode='lines', name='PFT', line=dict(color='dodgerblue'))
+        plotly_fig_pft.add_trace(go.Scatter(x=x, y=y, mode='lines', name='PFT'))
 
     # Update 'PFT' Plotly figure layout
     plotly_fig_pft.update_layout(
