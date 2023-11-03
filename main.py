@@ -346,8 +346,82 @@ elif page == "Models":
         # Display Plotly figure using st.plotly_chart()
         st.plotly_chart(fig_january, use_container_width=True)
     elif model_section == "LSTM":
-        # Add code for Model B
-        pass
+        # Load your Keras model
+        model = keras.models.load_model('best_model_lstm.h5')
+        trainPredict = model.predict(trainX)
+        testPredict = model.predict(testX)
+
+        trainPredict = trainPredict.flatten()
+        testPredict = testPredict.flatten()
+
+        # Plotting in Plotly
+        fig = go.Figure()
+
+        fig.add_trace(go.Scatter(x=train.index[look_back:], y=trainY, mode='lines', name='Training Data', line=dict(color='dodgerblue')))
+        fig.add_trace(go.Scatter(x=test.index[look_back:], y=testY, mode='lines', name='Testing Data', line=dict(color='green')))
+        fig.add_trace(go.Scatter(x=data.index[look_back:len(trainPredict) + look_back], y=trainPredict, mode='lines', name='Training Predictions', line=dict(color='indianred')))
+        fig.add_trace(go.Scatter(x=data.index[len(trainPredict) + 2 * look_back:], y=testPredict, mode='lines', name='Testing Predictions', line=dict(color='yellow')))
+
+        fig.update_layout(
+            title='Actual vs Predicted',
+            xaxis_title='Months',
+            yaxis_title='MWT',
+            xaxis=dict(tickformat="%b"),  # Show all months on x-axis
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+                xanchor="right",
+                x=1
+            )
+        )
+
+        # Display Plotly figure using st.plotly_chart()
+        st.plotly_chart(fig, use_container_width=True)
+
+        # Plotting actual vs predicted data in Plotly
+        fig_january = go.Figure()
+
+        fig_january.add_trace(go.Scatter(x=data.index[:744], y=data[:744], mode='lines', name='Actual Data', line=dict(color='dodgerblue')))
+        fig_january.add_trace(go.Scatter(x=data.index[:744], y=trainPredict[:744], mode='lines', name='Predicted Data', line=dict(color='indianred')))
+
+        fig_january.update_layout(
+            title='Actual vs Predicted Data for January 2022 (One Month Prediction)',
+            xaxis_title='Time',
+            yaxis_title='Value',
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+                xanchor="right",
+                x=1
+            )
+        )
+
+        # Display Plotly figure using st.plotly_chart()
+        st.plotly_chart(fig_january, use_container_width=True)
+
+        # Plotting actual vs predicted data in Plotly
+        fig_january = go.Figure()
+
+        fig_january.add_trace(go.Scatter(x=data.index[:24], y=data[:24], mode='lines', name='Actual Data', line=dict(color='dodgerblue')))
+        fig_january.add_trace(go.Scatter(x=data.index[:24], y=trainPredict[:24], mode='lines', name='Predicted Data', line=dict(color='indianred')))
+
+        fig_january.update_layout(
+            title='Actual vs Predicted Data for January 2022 (One Day Prediction)',
+            xaxis_title='Time',
+            yaxis_title='Value',
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+                xanchor="right",
+                x=1
+            )
+        )
+
+        # Display Plotly figure using st.plotly_chart()
+        st.plotly_chart(fig_january, use_container_width=True)
     elif model_section == "GRU":
         # Add code for Model C
         pass
