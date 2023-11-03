@@ -249,7 +249,8 @@ elif page == "Models":
 
     # Prepare the dataset for the neural network
     def create_dataset(dataset, look_back=1):
-        dataX, dataY = pd.DataFrame(), pd.Series()
+        dataX = pd.DataFrame()  # Initializing dataX as an empty DataFrame
+        dataY = pd.Series()
         for i in range(len(dataset) - look_back):
             dataX = dataX.append(dataset.iloc[i:(i + look_back)].reset_index(drop=True))
             dataY = dataY.append(pd.Series(dataset.iloc[i + look_back]))
