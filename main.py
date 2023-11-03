@@ -76,7 +76,7 @@ if page == "Exploratory Data Analysis":
     lines_mwt = ax.get_lines()
 
     # Create a Plotly figure for 'MWT'
-    plotly_fig_mwt = go.Figure()
+    plotly_fig_mwt = go.Figure(marker=dict(color='dodgerblue')
     for line in lines_mwt:
         x, y = line.get_data()
         plotly_fig_mwt.add_trace(go.Scatter(x=x, y=y, mode='lines', name='MWT'))
@@ -104,7 +104,7 @@ if page == "Exploratory Data Analysis":
     lines_pft = ax_pft.get_lines()
 
     # Create a Plotly figure for 'PFT'
-    plotly_fig_pft = go.Figure()
+    plotly_fig_pft = go.Figure(marker=dict(color='dodgerblue')
     for line in lines_pft:
         x, y = line.get_data()
         plotly_fig_pft.add_trace(go.Scatter(x=x, y=y, mode='lines', name='PFT'))
