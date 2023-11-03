@@ -64,7 +64,7 @@ if page == "Exploratory Data Analysis":
     st.write("### Exploratory Data Analysis")
     # Plotting 'MWT' Time Series
     fig, ax = plt.subplots()
-    ax.plot(MWT_data.index, MWT_data['MWT'], color='dodgerblue')
+    ax.plot(MWT_data.index, MWT_data['MWT'])
     ax.set_xlabel('Month')
     ax.set_ylabel('MWT')
     ax.set_title('MWT Time Series Plot')
@@ -92,7 +92,7 @@ if page == "Exploratory Data Analysis":
 
     # Plotting 'PFT' Time Series in a separate figure
     fig_pft, ax_pft = plt.subplots()
-    ax_pft.plot(MWT_data.index, MWT_data['PFT'], color='dodgerblue')
+    ax_pft.plot(MWT_data.index, MWT_data['PFT'])
     ax_pft.set_xlabel('Month')
     ax_pft.set_ylabel('PFT')
     ax_pft.set_title('PFT Time Series Plot')
