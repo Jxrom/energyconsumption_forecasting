@@ -24,12 +24,18 @@ zero_mwt = energycon_df.loc[energycon_df.loc[:,'MWT'] == 0].index
 zero_pft = energycon_df.loc[energycon_df.loc[:,'PFT'] == 0].index
 
 def create_dataset(dataset, look_back=1):
-    dataX = pd.DataFrame()  # Initializing dataX as an empty DataFrame
+    dataX = []  # Initializing as a list
     dataY = pd.Series()
+    
     for i in range(len(dataset) - look_back):
-        dataX = dataX.append(dataset.iloc[i:(i + look_back)].reset_index(drop=True))
+        dataX.append(dataset.iloc[i:(i + look_back)].values)
         dataY = dataY.append(pd.Series(dataset.iloc[i + look_back]))
+        
+    # Convert the list to DataFrame
+    dataX = pd.DataFrame(np.array(dataX).reshape(-1, look_back))
+
     return dataX, dataY
+
 
 # Imputing zero values
 for index in zero_mwt:
