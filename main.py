@@ -79,7 +79,7 @@ if page == "Exploratory Data Analysis":
     plotly_fig_mwt = go.Figure()
     for line in lines_mwt:
         x, y = line.get_data()
-        plotly_fig_mwt.add_trace(go.Scatter(x=x, y=y, mode='lines', name='MWT'))
+        plotly_fig_mwt.add_trace(go.Scatter(x=x, y=y, mode='lines', name='MWT', line=dict(color='dodgerblue'))
 
     # Update 'MWT' Plotly figure layout
     plotly_fig_mwt.update_layout(
@@ -107,7 +107,7 @@ if page == "Exploratory Data Analysis":
     plotly_fig_pft = go.Figure()
     for line in lines_pft:
         x, y = line.get_data()
-        plotly_fig_pft.add_trace(go.Scatter(x=x, y=y, mode='lines', name='PFT'))
+        plotly_fig_pft.add_trace(go.Scatter(x=x, y=y, mode='lines', name='PFT', line=dict(color='dodgerblue'))
 
     # Update 'PFT' Plotly figure layout
     plotly_fig_pft.update_layout(
@@ -119,7 +119,7 @@ if page == "Exploratory Data Analysis":
     st.plotly_chart(plotly_fig_pft, use_container_width=True)
 
     # Interactive 'MWT' distribution using Plotly
-    plotly_fig_dist = go.Figure(data=[go.Histogram(x=MWT_data['MWT'], nbinsx=20)])
+    plotly_fig_dist = go.Figure(data=[go.Histogram(x=MWT_data['MWT'], nbinsx=20, line=dict(color='dodgerblue')])
     plotly_fig_dist.update_layout(
         title='MWT Distribution',
         xaxis_title='MWT Values',
