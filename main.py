@@ -83,12 +83,12 @@ if page == "Exploratory Data Analysis":
     st.plotly_chart(fig_pft, use_container_width=True)
     
         # Interactive 'MWT' distribution using Plotly
-        plotly_fig_dist = go.Figure(data=[go.Histogram(x=MWT_data['MWT'], nbinsx=20, marker=dict(color='dodgerblue'))])
-        plotly_fig_dist.update_layout(
-            title='MWT Distribution',
-            xaxis_title='MWT Values',
-            yaxis_title='Frequency'
-        )
+    plotly_fig_dist = go.Figure(data=[go.Histogram(x=MWT_data['MWT'], nbinsx=20, marker=dict(color='dodgerblue'))])
+    plotly_fig_dist.update_layout(
+        title='MWT Distribution',
+        xaxis_title='MWT Values',
+        yaxis_title='Frequency'
+    )
 
     st.plotly_chart(plotly_fig_dist, use_container_width=True)
 
