@@ -64,7 +64,7 @@ if page == "Exploratory Data Analysis":
     st.write("### Exploratory Data Analysis")
     # Plotting 'MWT' Time Series
     fig, ax = plt.subplots()
-    ax.plot(MWT_data.index, MWT_data['MWT'])
+    ax.plot(MWT_data.index, MWT_data['MWT'], color='dodgerblue')
     ax.set_xlabel('Month')
     ax.set_ylabel('MWT')
     ax.set_title('MWT Time Series Plot')
@@ -79,7 +79,7 @@ if page == "Exploratory Data Analysis":
     plotly_fig_mwt = go.Figure()
     for line in lines_mwt:
         x, y = line.get_data()
-        plotly_fig_mwt.add_trace(go.Scatter(x=x, y=y, mode='lines', name='MWT', line=dict(color='dodgerblue'))
+        plotly_fig_mwt.add_trace(go.Scatter(x=x, y=y, mode='lines', name='MWT'))
 
     # Update 'MWT' Plotly figure layout
     plotly_fig_mwt.update_layout(
@@ -92,7 +92,7 @@ if page == "Exploratory Data Analysis":
 
     # Plotting 'PFT' Time Series in a separate figure
     fig_pft, ax_pft = plt.subplots()
-    ax_pft.plot(MWT_data.index, MWT_data['PFT'])
+    ax_pft.plot(MWT_data.index, MWT_data['PFT'], color='dodgerblue')  # Change color here
     ax_pft.set_xlabel('Month')
     ax_pft.set_ylabel('PFT')
     ax_pft.set_title('PFT Time Series Plot')
@@ -119,7 +119,7 @@ if page == "Exploratory Data Analysis":
     st.plotly_chart(plotly_fig_pft, use_container_width=True)
 
     # Interactive 'MWT' distribution using Plotly
-    plotly_fig_dist = go.Figure(data=[go.Histogram(x=MWT_data['MWT'], nbinsx=20, line=dict(color='dodgerblue')])
+    plotly_fig_dist = go.Figure(data=[go.Histogram(x=MWT_data['MWT'], nbinsx=20, marker=dict(color='dodgerblue'))])
     plotly_fig_dist.update_layout(
         title='MWT Distribution',
         xaxis_title='MWT Values',
