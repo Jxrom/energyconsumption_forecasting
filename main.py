@@ -74,7 +74,7 @@ if page == "Exploratory Data Analysis":
     
     # Plotting 'PFT' Time Series in Plotly
     fig_pft = go.Figure()
-    fig_pft.add_trace(go.Scatter(x=MWT_data.index, y=MWT_data['PFT'], mode='lines', name='PFT', line=dict(color='green')))
+    fig_pft.add_trace(go.Scatter(x=MWT_data.index, y=MWT_data['PFT'], mode='lines', name='PFT', line=dict(color='limegreen')))
     fig_pft.update_layout(
         xaxis_title='Month',
         yaxis_title='PFT',
