@@ -92,7 +92,7 @@ if page == "Exploratory Data Analysis":
 
     # Plotting 'PFT' Time Series in a separate figure
     fig_pft, ax_pft = plt.subplots()
-    ax_pft.plot(MWT_data.index, MWT_data['PFT'], color='green')
+    ax_pft.plot(MWT_data.index, MWT_data['PFT'], color='dodgerblue')
     ax_pft.set_xlabel('Month')
     ax_pft.set_ylabel('PFT')
     ax_pft.set_title('PFT Time Series Plot')
