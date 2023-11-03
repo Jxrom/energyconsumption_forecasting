@@ -60,36 +60,22 @@ page = st.sidebar.radio("Go to", ("Exploratory Data Analysis", "Models", "Model 
 if page == "Exploratory Data Analysis":
     st.write("#### Raw Data")
     st.dataframe(energycon_df)
-
+    
     st.write("### Exploratory Data Analysis")
+    
     # Plotting 'MWT' Time Series
     fig, ax = plt.subplots()
-    ax.plot(MWT_data.index, MWT_data['MWT'], color='dodgerblue')
+    ax.plot(MWT_data.index, MWT_data['MWT'], color='dodgerblue')  # Change color here
     ax.set_xlabel('Month')
     ax.set_ylabel('MWT')
     ax.set_title('MWT Time Series Plot')
     ax.grid(True)
     ax.xaxis.set_major_locator(MonthLocator())
     ax.xaxis.set_major_formatter(DateFormatter("%b"))
-
-    # Get the data from the Matplotlib axes for 'MWT'
-    lines_mwt = ax.get_lines()
-
-    # Create a Plotly figure for 'MWT'
-    plotly_fig_mwt = go.Figure(marker=dict(color='dodgerblue')
-    for line in lines_mwt:
-        x, y = line.get_data()
-        plotly_fig_mwt.add_trace(go.Scatter(x=x, y=y, mode='lines', name='MWT'))
-
-    # Update 'MWT' Plotly figure layout
-    plotly_fig_mwt.update_layout(
-        xaxis_title='Month',
-        yaxis_title='MWT',
-        title='MWT Time Series Plot'
-    )
-
-    st.plotly_chart(plotly_fig_mwt, use_container_width=True)
-
+    
+    # Displaying the Matplotlib figure directly in Streamlit
+    st.pyplot(fig)
+    
     # Plotting 'PFT' Time Series in a separate figure
     fig_pft, ax_pft = plt.subplots()
     ax_pft.plot(MWT_data.index, MWT_data['PFT'], color='dodgerblue')  # Change color here
@@ -99,23 +85,20 @@ if page == "Exploratory Data Analysis":
     ax_pft.grid(True)
     ax_pft.xaxis.set_major_locator(MonthLocator())
     ax_pft.xaxis.set_major_formatter(DateFormatter("%b"))
-
-    # Get the data from the Matplotlib axes for 'PFT'
-    lines_pft = ax_pft.get_lines()
-
-    # Create a Plotly figure for 'PFT'
-    plotly_fig_pft = go.Figure(marker=dict(color='dodgerblue')
-    for line in lines_pft:
-        x, y = line.get_data()
-        plotly_fig_pft.add_trace(go.Scatter(x=x, y=y, mode='lines', name='PFT'))
-
-    # Update 'PFT' Plotly figure layout
-    plotly_fig_pft.update_layout(
-        xaxis_title='Month',
-        yaxis_title='PFT',
-        title='PFT Time Series Plot'
-    )
-
+    
+    # Displaying the Matplotlib figure for 'PFT' directly in Streamlit
+    st.pyplot(fig_pft)
+    
+    # For Plotly figure of 'MWT'
+    plotly_fig_mwt = go.Figure()
+    plotly_fig_mwt.add_trace(go.Scatter(x=MWT_data.index, y=MWT_data['MWT'], mode='lines', name='MWT', line=dict(color='dodgerblue')))
+    plotly_fig_mwt.update_layout(xaxis_title='Month', yaxis_title='MWT', title='MWT Time Series Plot')
+    st.plotly_chart(plotly_fig_mwt, use_container_width=True)
+    
+    # For Plotly figure of 'PFT'
+    plotly_fig_pft = go.Figure()
+    plotly_fig_pft.add_trace(go.Scatter(x=MWT_data.index, y=MWT_data['PFT'], mode='lines', name='PFT', line=dict(color='dodgerblue')))
+    plotly_fig_pft.update_layout(xaxis_title='Month', yaxis_title='PFT', title='PFT Time Series Plot')
     st.plotly_chart(plotly_fig_pft, use_container_width=True)
 
     # Interactive 'MWT' distribution using Plotly
