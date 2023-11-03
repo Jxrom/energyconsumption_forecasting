@@ -62,52 +62,33 @@ if page == "Exploratory Data Analysis":
     st.dataframe(energycon_df)
     
     st.write("### Exploratory Data Analysis")
-    
-    # Plotting 'MWT' Time Series
-    fig, ax = plt.subplots()
-    ax.plot(MWT_data.index, MWT_data['MWT'], color='dodgerblue')  # Change color here
-    ax.set_xlabel('Month')
-    ax.set_ylabel('MWT')
-    ax.set_title('MWT Time Series Plot')
-    ax.grid(True)
-    ax.xaxis.set_major_locator(MonthLocator())
-    ax.xaxis.set_major_formatter(DateFormatter("%b"))
-    
-    # Displaying the Matplotlib figure directly in Streamlit
-    st.pyplot(fig)
-    
-    # Plotting 'PFT' Time Series in a separate figure
-    fig_pft, ax_pft = plt.subplots()
-    ax_pft.plot(MWT_data.index, MWT_data['PFT'], color='dodgerblue')  # Change color here
-    ax_pft.set_xlabel('Month')
-    ax_pft.set_ylabel('PFT')
-    ax_pft.set_title('PFT Time Series Plot')
-    ax_pft.grid(True)
-    ax_pft.xaxis.set_major_locator(MonthLocator())
-    ax_pft.xaxis.set_major_formatter(DateFormatter("%b"))
-    
-    # Displaying the Matplotlib figure for 'PFT' directly in Streamlit
-    st.pyplot(fig_pft)
-    
-    # For Plotly figure of 'MWT'
-    plotly_fig_mwt = go.Figure()
-    plotly_fig_mwt.add_trace(go.Scatter(x=MWT_data.index, y=MWT_data['MWT'], mode='lines', name='MWT', line=dict(color='dodgerblue')))
-    plotly_fig_mwt.update_layout(xaxis_title='Month', yaxis_title='MWT', title='MWT Time Series Plot')
-    st.plotly_chart(plotly_fig_mwt, use_container_width=True)
-    
-    # For Plotly figure of 'PFT'
-    plotly_fig_pft = go.Figure()
-    plotly_fig_pft.add_trace(go.Scatter(x=MWT_data.index, y=MWT_data['PFT'], mode='lines', name='PFT', line=dict(color='dodgerblue')))
-    plotly_fig_pft.update_layout(xaxis_title='Month', yaxis_title='PFT', title='PFT Time Series Plot')
-    st.plotly_chart(plotly_fig_pft, use_container_width=True)
-
-    # Interactive 'MWT' distribution using Plotly
-    plotly_fig_dist = go.Figure(data=[go.Histogram(x=MWT_data['MWT'], nbinsx=20, marker=dict(color='dodgerblue'))])
-    plotly_fig_dist.update_layout(
-        title='MWT Distribution',
-        xaxis_title='MWT Values',
-        yaxis_title='Frequency'
+    # Plotting 'MWT' Time Series in Plotly
+    fig_mwt = go.Figure()
+    fig_mwt.add_trace(go.Scatter(x=MWT_data.index, y=MWT_data['MWT'], mode='lines', name='MWT', line=dict(color='dodgerblue')))
+    fig_mwt.update_layout(
+        xaxis_title='Month',
+        yaxis_title='MWT',
+        title='MWT Time Series Plot'
     )
+    st.plotly_chart(fig_mwt, use_container_width=True)
+    
+    # Plotting 'PFT' Time Series in Plotly
+    fig_pft = go.Figure()
+    fig_pft.add_trace(go.Scatter(x=MWT_data.index, y=MWT_data['PFT'], mode='lines', name='PFT', line=dict(color='green')))
+    fig_pft.update_layout(
+        xaxis_title='Month',
+        yaxis_title='PFT',
+        title='PFT Time Series Plot'
+    )
+    st.plotly_chart(fig_pft, use_container_width=True)
+    
+        # Interactive 'MWT' distribution using Plotly
+        plotly_fig_dist = go.Figure(data=[go.Histogram(x=MWT_data['MWT'], nbinsx=20, marker=dict(color='dodgerblue'))])
+        plotly_fig_dist.update_layout(
+            title='MWT Distribution',
+            xaxis_title='MWT Values',
+            yaxis_title='Frequency'
+        )
 
     st.plotly_chart(plotly_fig_dist, use_container_width=True)
 
