@@ -64,7 +64,7 @@ if page == "Exploratory Data Analysis":
     st.write("### Exploratory Data Analysis")
     # Plotting 'MWT' Time Series in Plotly
     fig_mwt = go.Figure()
-    fig_mwt.add_trace(go.Scatter(x=MWT_data.index, y=MWT_data['MWT'], mode='lines', name='MWT', line=dict(color='dodgerblue')))
+    fig_mwt.add_trace(go.Scatter(x=MWT_data.index, y=MWT_data['MWT'], mode='lines', name='MWT', line=dict(color='gold')))
     fig_mwt.update_layout(
         xaxis_title='Month',
         yaxis_title='MWT',
@@ -74,7 +74,7 @@ if page == "Exploratory Data Analysis":
     
     # Plotting 'PFT' Time Series in Plotly
     fig_pft = go.Figure()
-    fig_pft.add_trace(go.Scatter(x=MWT_data.index, y=MWT_data['PFT'], mode='lines', name='PFT', line=dict(color='olive')))
+    fig_pft.add_trace(go.Scatter(x=MWT_data.index, y=MWT_data['PFT'], mode='lines', name='PFT', line=dict(color='green')))
     fig_pft.update_layout(
         xaxis_title='Month',
         yaxis_title='PFT',
