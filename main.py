@@ -247,7 +247,6 @@ elif page == "Models":
     # Display Plotly figure using st.plotly_chart()
     st.plotly_chart(fig_train_test, use_container_width=True)
 
-    # Prepare the dataset for the neural network
     def create_dataset(dataset, look_back=1):
         dataX = pd.DataFrame()  # Initializing dataX as an empty DataFrame
         dataY = pd.Series()
